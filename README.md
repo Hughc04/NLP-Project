@@ -29,6 +29,14 @@ Run from the project folder, in order:
 
 Each script is run like `.venv\Scripts\python src\fetch_prices.py`. Tickers and dates are set in `src/config.py`.
 
+## Running in VS Code
+
+1. Open the `NLP-Project` folder (File > Open Folder). Install the Microsoft **Python** extension if prompted.
+2. `.vscode/settings.json` points VS Code at `.venv` and lets it resolve the imports in `src/`. If it does not pick the interpreter up, press Ctrl+Shift+P, choose **Python: Select Interpreter**, and pick `.venv\Scripts\python.exe`.
+3. Open any script in `src/` and press the Run button (top right), or use **Run and Debug** (Ctrl+Shift+D) and choose one of the numbered launch entries.
+
+Automatic venv activation is turned off on purpose: Windows blocks PowerShell scripts by default, which makes activation fail with a "running scripts is disabled" error. The Run button and launch entries use the venv's Python directly, so they don't need it. In a terminal, run scripts as `.venv\Scripts\python src\analysis.py`.
+
 ## What is and is not in the repo
 
 Committed: the code, `data/processed/scored.csv` (scores and returns, no text) and everything in `data/results/`.

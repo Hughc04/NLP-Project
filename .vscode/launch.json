@@ -1,0 +1,61 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Current file",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "1. Fetch prices",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/fetch_prices.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "2. Discover transcripts",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/discover_transcripts.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "3. Fetch transcripts (about 7 min)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/fetch_transcripts.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "4. Build events",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/build_events.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "5. Lexicon sentiment",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/lexicon_sentiment.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "6. Analysis",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/analysis.py",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
