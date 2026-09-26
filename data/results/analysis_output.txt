@@ -1,0 +1,42 @@
+Look-ahead checks passed:
+  - all day-0 closes are on or before the call date
+  - history-based features are empty for each company's first call (12 rows dropped)
+  - train 2023-03-01 to 2025-10-29 (86 events) strictly before test 2025-10-30 to 2026-09-10 (35 events)
+  - scaler fit on train only (inside the pipeline); LM word lists fixed, not tuned on returns
+
+== Correlations: headline (polarity) ==
+     feature    ret   n  pearson_r  pearson_p  spearman_rho  spearman_p
+    polarity ret_1d 133      0.010      0.910         0.039       0.656
+    polarity ret_3d 133      0.024      0.783         0.054       0.536
+    polarity ret_5d 133     -0.013      0.881         0.015       0.860
+    polarity abn_1d 133      0.002      0.981         0.040       0.645
+    polarity abn_3d 133     -0.002      0.977         0.025       0.777
+    polarity abn_5d 133     -0.050      0.566        -0.033       0.708
+polarity_rel ret_1d 121      0.179      0.050         0.223       0.014
+polarity_rel ret_3d 121      0.185      0.043         0.252       0.005
+polarity_rel ret_5d 121      0.177      0.052         0.263       0.004
+polarity_rel abn_1d 121      0.169      0.064         0.219       0.016
+polarity_rel abn_3d 121      0.157      0.085         0.204       0.025
+polarity_rel abn_5d 121      0.140      0.125         0.200       0.028
+
+All 108 feature x return pairs: nominal p<0.05 in 4 Pearson and 10 Spearman tests (about 5.4 expected by chance); significant after Benjamini-Hochberg (q<0.10): 0 Pearson, 0 Spearman
+
+== OLS: return = a + b * sentiment (HC3 robust SEs) ==
+           x      y   n    coef     se      p     r2
+    polarity ret_1d 133  0.0054 0.0449 0.9046 0.0001
+    polarity abn_1d 133  0.0011 0.0414 0.9796 0.0000
+    polarity ret_5d 133 -0.0090 0.0575 0.8762 0.0002
+    polarity abn_5d 133 -0.0308 0.0503 0.5400 0.0025
+polarity_rel ret_1d 121  0.1428 0.0641 0.0258 0.0319
+polarity_rel abn_1d 121  0.1265 0.0608 0.0376 0.0286
+polarity_rel ret_5d 121  0.1753 0.0832 0.0352 0.0313
+polarity_rel abn_5d 121  0.1252 0.0736 0.0888 0.0196
+
+== Up/down classification (logistic regression, time-based split) ==
+    target features  n_train  n_test  test_up_share  accuracy  acc_ci_low  acc_ci_high  precision  recall    f1  baseline_acc  p_vs_baseline
+ret_1d > 0 relative       86      35          0.429     0.543       0.382        0.695      0.444   0.267 0.333         0.571          0.698
+ret_1d > 0      raw       86      35          0.429     0.514       0.356        0.670      0.400   0.267 0.320         0.571          0.804
+abn_1d > 0 relative       86      35          0.429     0.629       0.463        0.768      1.000   0.133 0.235         0.571          0.307
+abn_1d > 0      raw       86      35          0.429     0.571       0.409        0.720      0.500   0.200 0.286         0.571          0.571
+
+Plots and tables written to C:\Users\hughc\NLP-Project\data\results
